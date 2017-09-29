@@ -1,0 +1,3 @@
+[submodule "SwiftSoup"]
+	path = SwiftSoup
+	url = git@github.com:scinfu/SwiftSoup.git
