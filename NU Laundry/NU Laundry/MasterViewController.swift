@@ -12,7 +12,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     // MARK: - Properties
 
-    private let dataRefreshControl = UIRefreshControl()
     private let searchController = UISearchController(searchResultsController: nil)
 
     private var locations = [Location]()
@@ -25,20 +24,25 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
         reloadLocations()
 
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationItem.largeTitleDisplayMode = .always
+        } else {
+            // Fallback on earlier versions
+        }
 
-        dataRefreshControl.tintColor = UIColor.white
-        dataRefreshControl.addTarget(self, action: #selector(reloadLocations), for: .valueChanged)
-        tableView.refreshControl = dataRefreshControl
 
         searchController.searchResultsUpdater = self
         searchController.searchBar.tintColor = UIColor.white
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.isActive = true
 
-//        if #available(iOS 11.0, *) {
-//            self.navigationItem.searchController = searchController
-//        } else {
-//            tableView.tableHeaderView = searchController.searchBar
-//        }
+        if #available(iOS 11.0, *) {
+            self.navigationItem.searchController = searchController
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +71,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     @objc private func reloadLocations() {
         DispatchQueue.main.async {
-            self.dataRefreshControl.beginRefreshing()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
         LaundryFetcher.fetchLocations { (locations, error) in
             DispatchQueue.main.async {
@@ -77,19 +81,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
                     self.locations = locations
                 }
                 self.tableView.reloadData()
-                self.dataRefreshControl.endRefreshing()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
             }
-        }
-    }
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail", let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController,
-            let indexPath = tableView.indexPathForSelectedRow {
-            controller.detailItem = locations[indexPath.row]
-            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            controller.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 
@@ -118,8 +113,23 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         }
 
         cell.textLabel!.text = location.name
-        cell.detailTextLabel!.text = location.availableWashers.description + " / " + location.availableDryers.description
+        cell.detailTextLabel!.text = location.availableWashers.description + " W " + location.availableDryers.description + " D"
         return cell
+    }
+
+    // MARK: - Segues
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail", let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController,
+            let indexPath = tableView.indexPathForSelectedRow {
+            let location: Location
+            if isFiltering() {
+                location = filteredLocations[indexPath.row]
+            } else {
+                location = locations[indexPath.row]
+            }
+            controller.detailItem = location
+        }
     }
 }
 

@@ -19,6 +19,7 @@
 		140985121F7DEAF300F89FC5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985111F7DEAF300F89FC5 /* Location.swift */; };
 		140985141F7DEAF900F89FC5 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985131F7DEAF900F89FC5 /* Machine.swift */; };
 		140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985151F7E034F00F89FC5 /* MachineCell.swift */; };
+		143F82621F7F4B56000EEC46 /* MachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F82611F7F4B56000EEC46 /* MachineView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		140985111F7DEAF300F89FC5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		140985131F7DEAF900F89FC5 /* Machine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		140985151F7E034F00F89FC5 /* MachineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineCell.swift; sourceTree = "<group>"; };
+		143F82611F7F4B56000EEC46 /* MachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				1409850D1F7D967400F89FC5 /* LaundryFetcher.swift */,
 				140985111F7DEAF300F89FC5 /* Location.swift */,
 				140985131F7DEAF900F89FC5 /* Machine.swift */,
+				143F82611F7F4B56000EEC46 /* MachineView.swift */,
 				140984F11F7D8B8B00F89FC5 /* Main.storyboard */,
 				140984F41F7D8B8B00F89FC5 /* Assets.xcassets */,
 				140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 140984FC1F7D8B8B00F89FC5 /* Build configuration list for PBXNativeTarget "NU Laundry" */;
 			buildPhases = (
+				1409851A1F7E072300F89FC5 /* Build Number */,
 				140984E41F7D8B8B00F89FC5 /* Sources */,
 				140984E51F7D8B8B00F89FC5 /* Frameworks */,
 				140984E61F7D8B8B00F89FC5 /* Resources */,
@@ -223,6 +227,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1409851A1F7E072300F89FC5 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		140984E41F7D8B8B00F89FC5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -232,6 +253,7 @@
 				140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */,
 				140984EE1F7D8B8B00F89FC5 /* MasterViewController.swift in Sources */,
 				140985121F7DEAF300F89FC5 /* Location.swift in Sources */,
+				143F82621F7F4B56000EEC46 /* MachineView.swift in Sources */,
 				140984EC1F7D8B8B00F89FC5 /* AppDelegate.swift in Sources */,
 				1409850E1F7D967400F89FC5 /* LaundryFetcher.swift in Sources */,
 				140985141F7DEAF900F89FC5 /* Machine.swift in Sources */,

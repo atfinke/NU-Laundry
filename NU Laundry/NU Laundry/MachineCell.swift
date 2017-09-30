@@ -8,31 +8,16 @@
 
 import UIKit
 
-class MachineCell: UITableViewCell {
+class MachineCell: UICollectionViewCell {
 
     // MARK: - Properties
 
-    @IBOutlet weak private var numberLabel: UILabel!
-    @IBOutlet weak private var titleLabel: UILabel!
-    @IBOutlet weak private var detailLabel: UILabel!
-    @IBOutlet weak private var noDetailTitleLabel: UILabel!
-
-    // MARK: - Helpers
-
-    func text(number: Int, title: String, detail: String?) {
-        numberLabel.text = number.description
-        titleLabel.text = title
-        noDetailTitleLabel.text = title
-        detailLabel.text = detail
-
-        if detail != nil {
-            detailLabel.alpha = 1.0
-            titleLabel.alpha = 1.0
-            noDetailTitleLabel.alpha = 0.0
-        } else {
-            detailLabel.alpha = 0.0
-            titleLabel.alpha = 0.0
-            noDetailTitleLabel.alpha = 1.0
+    var machine: Machine? = nil {
+        didSet {
+            machineView.machine = machine
         }
     }
+    
+    @IBOutlet weak private var machineView: MachineView!
+
 }

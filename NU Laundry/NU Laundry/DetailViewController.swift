@@ -8,11 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController {
+class DetailViewController: UICollectionViewController {
 
     // MARK: - Properties
-
-    private let dataRefreshControl = UIRefreshControl()
 
     private var dryers = [Machine]()
     private var washers = [Machine]()
@@ -24,24 +22,12 @@ class DetailViewController: UITableViewController {
         }
     }
 
-    // MARK: - View Life Cycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navigationItem.leftBarButtonItem = nil
-
-        dataRefreshControl.tintColor = UIColor.white
-        dataRefreshControl.addTarget(self, action: #selector(reloadMachines), for: .valueChanged)
-        tableView.refreshControl = dataRefreshControl
-    }
-
     // MARK: - Machines
 
     @objc private func reloadMachines() {
         guard let location = detailItem else { return }
         DispatchQueue.main.async {
-            self.dataRefreshControl.beginRefreshing()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
         LaundryFetcher.fetchMachines(for: location) { (washers, dryers, error) in
             DispatchQueue.main.async {
@@ -54,33 +40,23 @@ class DetailViewController: UITableViewController {
                 } else {
 
                 }
-                self.tableView.reloadData()
-                self.dataRefreshControl.endRefreshing()
+                self.collectionView?.reloadData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
             }
         }
     }
 
     // MARK: - Table View
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        print(234)
         return 2
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 && !washers.isEmpty {
-            return "Washers"
-        } else if section == 1 && !dryers.isEmpty {
-            return "Dryers"
-        } else {
-            return nil
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(234)
         if section == 0 {
             return washers.count
         } else {
@@ -88,7 +64,7 @@ class DetailViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let machine: Machine
         if indexPath.section == 0 {
             machine = washers[indexPath.row]
@@ -96,13 +72,11 @@ class DetailViewController: UITableViewController {
             machine = dryers[indexPath.row]
         }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MachineCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? MachineCell else {
             fatalError()
         }
-        cell.text(number: machine.number,
-                  title: machine.status.title,
-                  detail: machine.status.detail)
-
+        cell.machine = machine
+print(32)
         return cell
     }
 

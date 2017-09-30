@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let splitViewController = window?.rootViewController as? UISplitViewController else {
             fatalError()
         }
+        splitViewController.delegate = self
         splitViewController.preferredDisplayMode = .allVisible
 
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -25,13 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().prefersLargeTitles = true
+            
             UINavigationBar.appearance().largeTitleTextAttributes = [
                 .foregroundColor: UIColor.white
             ]
         }
 
+        return true
+    }
+
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
 
