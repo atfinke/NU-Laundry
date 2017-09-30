@@ -48,7 +48,7 @@ class DetailViewController: UITableViewController {
                     self.washers = washers
                     self.dryers = dryers
 
-                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+                    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
                         self?.reloadMachines()
                     }
                     Answers.logCustomEvent(withName: "Updated Machines", customAttributes: nil)
@@ -82,6 +82,7 @@ class DetailViewController: UITableViewController {
         guard let locationName = detailItem?.name else { return }
 
         let content = UNMutableNotificationContent()
+        content.sound = UNNotificationSound.default()
         content.title = "Laundry Reminder"
         content.body = "\(machineType) \(machine.number.description)'s cycle is almost done."
 
@@ -119,7 +120,10 @@ class DetailViewController: UITableViewController {
         }
 
         let remindAction = UITableViewRowAction(style: .default, title: "Remind Me") { (_, indexPath) in
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { (granted, _) in
+            let feedback = UISelectionFeedbackGenerator()
+            feedback.selectionChanged()
+
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, _) in
                 if granted {
                     let machineType = indexPath.section == 0 ? "Washer" : "Dryer"
                     self.scheduleNotification(machine: machine, machineType: machineType, time: time)

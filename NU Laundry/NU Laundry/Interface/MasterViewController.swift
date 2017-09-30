@@ -72,7 +72,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             DispatchQueue.main.async {
                 if let locations = locations, !locations.isEmpty {
                     self.locations = locations
-                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+                    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
                         self?.reloadLocations()
                     }
                     Answers.logCustomEvent(withName: "Updated Locations", customAttributes: nil)
@@ -130,7 +130,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail",
             let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController,
-            
+
             let indexPath = tableView.indexPathForSelectedRow {
             let location: Location
             if isFiltering() {

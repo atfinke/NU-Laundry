@@ -33,13 +33,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "icon copy-1.png",
+      "filename" : "wash-5.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "icon copy.png",
+      "filename" : "wash.png",
       "scale" : "3x"
     },
     {
@@ -75,25 +75,25 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "icon copy-4.png",
+      "filename" : "wash-4.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "icon copy-2.png",
+      "filename" : "wash-3.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "icon copy-3.png",
+      "filename" : "wash-2.png",
       "scale" : "2x"
     },
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "icon.png",
+      "filename" : "wash-1.png",
       "scale" : "1x"
     }
   ],
