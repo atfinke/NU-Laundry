@@ -32,15 +32,15 @@ class MachineCell: UITableViewCell {
             detailLabel.text = machine.status.detail?.uppercased()
 
             switch machine.status {
-            case .active(_, _):
+            case .active:
                 numberLabel.backgroundColor = UIColor.negative
             case .available:
                 numberLabel.backgroundColor = UIColor.postive
-            case .cycleEnded(_):
+            case .cycleEnded:
                 numberLabel.backgroundColor = UIColor.orange
             case .outOfService:
                 numberLabel.backgroundColor = UIColor.black
-            case .extendedCycle(_):
+            case .extendedCycle:
                 numberLabel.backgroundColor = UIColor.negative
             case .unknown:
                 numberLabel.backgroundColor = UIColor.lightGray

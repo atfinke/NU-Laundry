@@ -30,7 +30,7 @@ struct LaundryFetcher {
 
     static func fetchLocations(completion: @escaping ((_ locations: [Location]?, _ error: ParsingError?) -> Void)) {
         let url = URL(string: "http://classic.laundryview.com/lvs.php?s=328")!
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, .connectionError)
                 return
@@ -79,13 +79,18 @@ struct LaundryFetcher {
                 }
 
                 let (washers, dryers) = try parse(locationAvailability: locationAvailability[index].text())
-                let location = Location(url: url, name: locationName, availableDryers: dryers, availableWashers: washers)
+                let location = Location(url: url,
+                                        name: locationName,
+                                        availableDryers: dryers,
+                                        availableWashers: washers)
                 locations.append(location)
             } catch {
                 throw ParsingError.locationDetailError
             }
         }
-        return locations
+        return locations.sorted(by: { (lhs, rhs) -> Bool in
+            return lhs.name < rhs.name
+        })
     }
 
     private static func parse(locationAvailability: String) throws -> (washers: Int, dryers: Int) {
@@ -111,9 +116,9 @@ struct LaundryFetcher {
     // MARK: - Machines
 
     static func fetchMachines(for location: Location,
-                              completion: @escaping ((_ washers: [Machine]?, _ dryers: [Machine]?, _ error: ParsingError?) -> Void)) {
+                              completion: @escaping (([Machine]?, [Machine]?, ParsingError?) -> Void)) {
 
-        let dataTask = URLSession.shared.dataTask(with: location.url) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: location.url) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, nil, .connectionError)
                 return
@@ -161,10 +166,11 @@ struct LaundryFetcher {
 
                     var progress = 0.0
                     let selectorString = "td.bgruntime > table > tbody > tr > td > table > tbody > tr > td > img"
-                    if let progressBarWidth = try? attributesRow.select(selectorString).attr("width"), let progressBarValue = Double(progressBarWidth) {
+                    if let progressBarWidth = try? attributesRow.select(selectorString).attr("width"),
+                        let progressBarValue = Double(progressBarWidth) {
                         progress = progressBarValue / 240
                     }
-                    
+
                     status = .active(time: time, progress: progress)
                 } else if let index = statusRow.range(of: "cycle ended ")?.upperBound,
                     let endIndex = statusRow.range(of: " minutes ago")?.lowerBound,

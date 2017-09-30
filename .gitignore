@@ -65,3 +65,12 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+NU\ Laundry/report.xml
+NU\ Laundry/Preview.html
+NU\ Laundry/screenshots
+NU\ Laundry/metadata
+NU\ Laundry/test_output
+
+NU\ Laundry/fabric.apikey
+NU\ Laundry/fabric.buildsecret

@@ -23,24 +23,24 @@ struct Machine {
 
         // MARK: - Properties
 
-        var title: String  {
+        var title: String {
             switch self {
             case .available:  return "Available"
-            case .active(_, _): return "In Use"
-            case .cycleEnded(_):  return "Cycle Ended"
+            case .active: return "In Use"
+            case .cycleEnded:  return "Cycle Ended"
             case .outOfService: return "Out Of Service"
-            case .extendedCycle(_): return "Running Extended Cycle"
+            case .extendedCycle: return "Running Extended Cycle"
             case .unknown: return "Unknown"
             }
         }
 
-        var detail: String?  {
+        var detail: String? {
             switch self {
             case .available: return nil
             case .active(let time, _): return "\(time) Min Left"
             case .cycleEnded(let time):  return "\(time) Min Ago"
             case .outOfService: return nil
-            case .extendedCycle(_): return nil
+            case .extendedCycle: return nil
             case .unknown: return nil
             }
         }

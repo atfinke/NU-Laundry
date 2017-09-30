@@ -28,7 +28,6 @@
         <!--Select A Location-->
         <scene sceneID="7b3-ta-vSn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t8c-eC-psQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="Rm6-i6-RNk" customClass="DetailViewController" customModule="NU_Laundry" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="hrD-ET-oQn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -107,6 +106,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select A Location" id="P8U-3b-zmb"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t8c-eC-psQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="708" y="127.28635682158921"/>
         </scene>
@@ -197,7 +197,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Laundry Rooms" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Wildcat Wash" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>

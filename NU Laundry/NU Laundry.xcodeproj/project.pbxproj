@@ -20,6 +20,11 @@
 		14218FD71F7F73580039E097 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; };
 		14218FD81F7F73580039E097 /* SwiftSoup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		143F82651F7F6895000EEC46 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F82641F7F6895000EEC46 /* LocationCell.swift */; };
+		147E87EF1F804746001391B1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E87EE1F8046C1001391B1 /* Crashlytics.framework */; };
+		147E87F01F804746001391B1 /* Crashlytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 147E87EE1F8046C1001391B1 /* Crashlytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		147E87F11F804749001391B1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 147E87ED1F8046C1001391B1 /* Fabric.framework */; };
+		147E87F21F804749001391B1 /* Fabric.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 147E87ED1F8046C1001391B1 /* Fabric.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		147E87F71F804882001391B1 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 147E87F51F804876001391B1 /* fabric.apikey */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +58,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				147E87F01F804746001391B1 /* Crashlytics.framework in Embed Frameworks */,
 				14218FD81F7F73580039E097 /* SwiftSoup.framework in Embed Frameworks */,
+				147E87F21F804749001391B1 /* Fabric.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +82,10 @@
 		143F82641F7F6895000EEC46 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftSoup.xcodeproj; path = ../../../SwiftSoup/SwiftSoup.xcodeproj; sourceTree = "<group>"; };
 		143F82741F7F72A3000EEC46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		147E87ED1F8046C1001391B1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		147E87EE1F8046C1001391B1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		147E87F51F804876001391B1 /* fabric.apikey */ = {isa = PBXFileReference; lastKnownFileType = text; path = fabric.apikey; sourceTree = SOURCE_ROOT; };
+		147E87F61F804876001391B1 /* fabric.buildsecret */ = {isa = PBXFileReference; lastKnownFileType = text; path = fabric.buildsecret; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147E87EF1F804746001391B1 /* Crashlytics.framework in Frameworks */,
 				14218FD71F7F73580039E097 /* SwiftSoup.framework in Frameworks */,
+				147E87F11F804749001391B1 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,10 +153,14 @@
 		143F82681F7F6D4E000EEC46 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				147E87F51F804876001391B1 /* fabric.apikey */,
+				147E87F61F804876001391B1 /* fabric.buildsecret */,
 				140984F41F7D8B8B00F89FC5 /* Assets.xcassets */,
 				143F82741F7F72A3000EEC46 /* Info.plist */,
 				140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */,
 				140984F11F7D8B8B00F89FC5 /* Main.storyboard */,
+				147E87EE1F8046C1001391B1 /* Crashlytics.framework */,
+				147E87ED1F8046C1001391B1 /* Fabric.framework */,
 				143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */,
 			);
 			path = Resources;
@@ -170,6 +187,8 @@
 				140984E51F7D8B8B00F89FC5 /* Frameworks */,
 				140984E61F7D8B8B00F89FC5 /* Resources */,
 				1409850C1F7D8CF200F89FC5 /* Embed Frameworks */,
+				147E87EA1F80469F001391B1 /* Swiftlint */,
+				147E87EC1F8046A0001391B1 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -244,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140984F81F7D8B8B00F89FC5 /* LaunchScreen.storyboard in Resources */,
+				147E87F71F804882001391B1 /* fabric.apikey in Resources */,
 				140984F51F7D8B8B00F89FC5 /* Assets.xcassets in Resources */,
 				140984F31F7D8B8B00F89FC5 /* Main.storyboard in Resources */,
 			);
@@ -265,6 +285,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"";
+		};
+		147E87EA1F80469F001391B1 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		147E87EC1F8046A0001391B1 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FABRIC_APIKEY_FILE=\"${SRCROOT}/fabric.apikey\"\nFABRIC_BUILDSECRET_FILE=\"${SRCROOT}/fabric.buildsecret\"\n\nif test ! -f \"$FABRIC_APIKEY_FILE\" -o ! -f \"$FABRIC_BUILDSECRET_FILE\"; then\necho \"This build wants to upload dSYM files to Crashlytics.\"\necho \"Uploading is possible only if a Fabric API key and a Fabric build secret are\"\necho \"available. This build is failing because at least one of these pieces of\"\necho \"information is missing.\"\necho \"\"\necho \"To fix the problem, create the following files and store the API key and\"\necho \"build secret, respectively, within those files:\"\necho \"\"\necho \"  $FABRIC_APIKEY_FILE\"\necho \"  $FABRIC_BUILDSECRET_FILE\"\necho \"\"\necho \"If you forked the project then you must register with Crashlytics and\"\necho \"get your own API key and build secret.\"\n\n# Let the build fail\nexit 1\nfi\n\nFABRIC_APIKEY=$(cat \"$FABRIC_APIKEY_FILE\")\nif test $? -ne 0; then\necho \"Cannot read $FABRIC_APIKEY_FILE\"\nexit 1\nfi\n\nFABRIC_BUILDSECRET=$(cat \"$FABRIC_BUILDSECRET_FILE\")\nif test $? -ne 0; then\necho \"Cannot read $FABRIC_BUILDSECRET_FILE\"\nexit 1\nfi\n\necho \"Uploading dSYM files to Crashlytics\"\n\"./Fabric.framework/run\" \"$FABRIC_APIKEY\" \"$FABRIC_BUILDSECRET\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -428,6 +476,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/NU Laundry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -445,6 +497,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/NU Laundry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

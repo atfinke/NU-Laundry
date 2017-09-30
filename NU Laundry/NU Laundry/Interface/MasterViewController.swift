@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
@@ -25,20 +26,16 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         reloadLocations()
 
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            navigationItem.largeTitleDisplayMode = .always
-        }
-        
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.tintColor = UIColor.white
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.isActive = true
+            searchController.isActive = true
+            searchController.searchResultsUpdater = self
+            searchController.searchBar.tintColor = UIColor.white
+            searchController.dimsBackgroundDuringPresentation = false
+            searchController.hidesNavigationBarDuringPresentation = false
 
-        if #available(iOS 11.0, *) {
-            self.navigationItem.searchController = searchController
-        } else {
-            tableView.tableHeaderView = searchController.searchBar
+            navigationItem.searchController = searchController
+
+            navigationItem.largeTitleDisplayMode = .always
+            navigationController?.navigationBar.prefersLargeTitles = true
         }
     }
 
@@ -70,14 +67,31 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         DispatchQueue.main.async {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
-        LaundryFetcher.fetchLocations { (locations, error) in
+
+        LaundryFetcher.fetchLocations { (locations, _) in
             DispatchQueue.main.async {
-                if let _ = error {
-                    self.locations = []
-                } else if let locations = locations {
+                if let locations = locations, !locations.isEmpty {
                     self.locations = locations
+                    Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+                        self?.reloadLocations()
+                    }
+                    Answers.logCustomEvent(withName: "Updated Locations", customAttributes: nil)
+                } else {
+                    self.locations = []
+
+                    let message = "An issue occured when trying to update the laundry infomation."
+                    let alertController = UIAlertController(title: "Connection Issue",
+                                                            message: message,
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
+                        self.reloadLocations()
+                    }))
+                    self.present(alertController, animated: true, completion: nil)
+
+                    Answers.logCustomEvent(withName: "Locations Error", customAttributes: nil)
                 }
                 self.tableView.reloadData()
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
@@ -114,7 +128,9 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail", let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController,
+        if segue.identifier == "showDetail",
+            let controller = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController,
+            
             let indexPath = tableView.indexPathForSelectedRow {
             let location: Location
             if isFiltering() {
@@ -126,4 +142,3 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
 }
-
