@@ -27,11 +27,8 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
             navigationItem.largeTitleDisplayMode = .always
-        } else {
-            // Fallback on earlier versions
         }
-
-
+        
         searchController.searchResultsUpdater = self
         searchController.searchBar.tintColor = UIColor.white
         searchController.dimsBackgroundDuringPresentation = false
@@ -98,12 +95,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? LocationCell else {
+            fatalError()
+        }
 
         let location: Location
         if isFiltering() {
@@ -112,8 +107,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             location = locations[indexPath.row]
         }
 
-        cell.textLabel!.text = location.name
-        cell.detailTextLabel!.text = location.availableWashers.description + " W " + location.availableDryers.description + " D"
+        cell.location = location
         return cell
     }
 

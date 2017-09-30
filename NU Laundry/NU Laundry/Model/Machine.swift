@@ -29,7 +29,7 @@ struct Machine {
             case .active(_, _): return "In Use"
             case .cycleEnded(_):  return "Cycle Ended"
             case .outOfService: return "Out Of Service"
-            case .extendedCycle(_): return "Extended Cycle"
+            case .extendedCycle(_): return "Running Extended Cycle"
             case .unknown: return "Unknown"
             }
         }
@@ -37,10 +37,10 @@ struct Machine {
         var detail: String?  {
             switch self {
             case .available: return nil
-            case .active(let time, _): return "\(time) Minutes Remaining"
-            case .cycleEnded(let time):  return "\(time) Minutes Ago"
+            case .active(let time, _): return "\(time) Min Left"
+            case .cycleEnded(let time):  return "\(time) Min Ago"
             case .outOfService: return nil
-            case .extendedCycle(let time): return "Running For \(time) Minutes"
+            case .extendedCycle(_): return nil
             case .unknown: return nil
             }
         }

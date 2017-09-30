@@ -13,36 +13,36 @@
 		140984F31F7D8B8B00F89FC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140984F11F7D8B8B00F89FC5 /* Main.storyboard */; };
 		140984F51F7D8B8B00F89FC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140984F41F7D8B8B00F89FC5 /* Assets.xcassets */; };
 		140984F81F7D8B8B00F89FC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */; };
-		140985081F7D8CF200F89FC5 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140985051F7D8B9800F89FC5 /* SwiftSoup.framework */; };
-		140985091F7D8CF200F89FC5 /* SwiftSoup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 140985051F7D8B9800F89FC5 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1409850E1F7D967400F89FC5 /* LaundryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409850D1F7D967400F89FC5 /* LaundryFetcher.swift */; };
 		140985121F7DEAF300F89FC5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985111F7DEAF300F89FC5 /* Location.swift */; };
 		140985141F7DEAF900F89FC5 /* Machine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985131F7DEAF900F89FC5 /* Machine.swift */; };
 		140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985151F7E034F00F89FC5 /* MachineCell.swift */; };
-		143F82621F7F4B56000EEC46 /* MachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F82611F7F4B56000EEC46 /* MachineView.swift */; };
+		14218FD71F7F73580039E097 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; };
+		14218FD81F7F73580039E097 /* SwiftSoup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		143F82651F7F6895000EEC46 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F82641F7F6895000EEC46 /* LocationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		140985041F7D8B9800F89FC5 /* PBXContainerItemProxy */ = {
+		14218FD91F7F73580039E097 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */;
+			containerPortal = 143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CE418151DAA54A900240B42;
+			remoteInfo = SwiftSoup;
+		};
+		143F826E1F7F6D60000EEC46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8CE418161DAA54A900240B42;
 			remoteInfo = SwiftSoup;
 		};
-		140985061F7D8B9800F89FC5 /* PBXContainerItemProxy */ = {
+		143F82701F7F6D60000EEC46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */;
+			containerPortal = 143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8CE4181F1DAA54A900240B42;
 			remoteInfo = SwiftSoupTests;
-		};
-		1409850A1F7D8CF200F89FC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8CE418151DAA54A900240B42;
-			remoteInfo = SwiftSoup;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -53,7 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				140985091F7D8CF200F89FC5 /* SwiftSoup.framework in Embed Frameworks */,
+				14218FD81F7F73580039E097 /* SwiftSoup.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,13 +68,13 @@
 		140984F21F7D8B8B00F89FC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		140984F41F7D8B8B00F89FC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140984F71F7D8B8B00F89FC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		140984F91F7D8B8B00F89FC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftSoup.xcodeproj; path = ../../SwiftSoup/SwiftSoup.xcodeproj; sourceTree = "<group>"; };
 		1409850D1F7D967400F89FC5 /* LaundryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaundryFetcher.swift; sourceTree = "<group>"; };
 		140985111F7DEAF300F89FC5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		140985131F7DEAF900F89FC5 /* Machine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		140985151F7E034F00F89FC5 /* MachineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineCell.swift; sourceTree = "<group>"; };
-		143F82611F7F4B56000EEC46 /* MachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineView.swift; sourceTree = "<group>"; };
+		143F82641F7F6895000EEC46 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftSoup.xcodeproj; path = ../../../SwiftSoup/SwiftSoup.xcodeproj; sourceTree = "<group>"; };
+		143F82741F7F72A3000EEC46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				140985081F7D8CF200F89FC5 /* SwiftSoup.framework in Frameworks */,
+				14218FD71F7F73580039E097 /* SwiftSoup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,27 +109,51 @@
 			isa = PBXGroup;
 			children = (
 				140984EB1F7D8B8B00F89FC5 /* AppDelegate.swift */,
-				140984ED1F7D8B8B00F89FC5 /* MasterViewController.swift */,
-				140984EF1F7D8B8B00F89FC5 /* DetailViewController.swift */,
-				140985151F7E034F00F89FC5 /* MachineCell.swift */,
-				1409850D1F7D967400F89FC5 /* LaundryFetcher.swift */,
-				140985111F7DEAF300F89FC5 /* Location.swift */,
-				140985131F7DEAF900F89FC5 /* Machine.swift */,
-				143F82611F7F4B56000EEC46 /* MachineView.swift */,
-				140984F11F7D8B8B00F89FC5 /* Main.storyboard */,
-				140984F41F7D8B8B00F89FC5 /* Assets.xcassets */,
-				140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */,
-				140984F91F7D8B8B00F89FC5 /* Info.plist */,
-				140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */,
+				143F82671F7F6D41000EEC46 /* Interface */,
+				143F82661F7F6D37000EEC46 /* Model */,
+				143F82681F7F6D4E000EEC46 /* Resources */,
 			);
 			path = "NU Laundry";
 			sourceTree = "<group>";
 		};
-		140985001F7D8B9800F89FC5 /* Products */ = {
+		143F82661F7F6D37000EEC46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				140985051F7D8B9800F89FC5 /* SwiftSoup.framework */,
-				140985071F7D8B9800F89FC5 /* SwiftSoupTests.xctest */,
+				1409850D1F7D967400F89FC5 /* LaundryFetcher.swift */,
+				140985111F7DEAF300F89FC5 /* Location.swift */,
+				140985131F7DEAF900F89FC5 /* Machine.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		143F82671F7F6D41000EEC46 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				143F82641F7F6895000EEC46 /* LocationCell.swift */,
+				140985151F7E034F00F89FC5 /* MachineCell.swift */,
+				140984ED1F7D8B8B00F89FC5 /* MasterViewController.swift */,
+				140984EF1F7D8B8B00F89FC5 /* DetailViewController.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		143F82681F7F6D4E000EEC46 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				140984F41F7D8B8B00F89FC5 /* Assets.xcassets */,
+				143F82741F7F72A3000EEC46 /* Info.plist */,
+				140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */,
+				140984F11F7D8B8B00F89FC5 /* Main.storyboard */,
+				143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		143F826A1F7F6D5F000EEC46 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */,
+				143F82711F7F6D60000EEC46 /* SwiftSoupTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,7 +174,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				1409850B1F7D8CF200F89FC5 /* PBXTargetDependency */,
+				14218FDA1F7F73580039E097 /* PBXTargetDependency */,
 			);
 			name = "NU Laundry";
 			productName = "NU Laundry";
@@ -186,8 +210,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 140985001F7D8B9800F89FC5 /* Products */;
-					ProjectRef = 140984FF1F7D8B9800F89FC5 /* SwiftSoup.xcodeproj */;
+					ProductGroup = 143F826A1F7F6D5F000EEC46 /* Products */;
+					ProjectRef = 143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -198,18 +222,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		140985051F7D8B9800F89FC5 /* SwiftSoup.framework */ = {
+		143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SwiftSoup.framework;
-			remoteRef = 140985041F7D8B9800F89FC5 /* PBXContainerItemProxy */;
+			remoteRef = 143F826E1F7F6D60000EEC46 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		140985071F7D8B9800F89FC5 /* SwiftSoupTests.xctest */ = {
+		143F82711F7F6D60000EEC46 /* SwiftSoupTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SwiftSoupTests.xctest;
-			remoteRef = 140985061F7D8B9800F89FC5 /* PBXContainerItemProxy */;
+			remoteRef = 143F82701F7F6D60000EEC46 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -240,7 +264,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -253,9 +277,9 @@
 				140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */,
 				140984EE1F7D8B8B00F89FC5 /* MasterViewController.swift in Sources */,
 				140985121F7DEAF300F89FC5 /* Location.swift in Sources */,
-				143F82621F7F4B56000EEC46 /* MachineView.swift in Sources */,
 				140984EC1F7D8B8B00F89FC5 /* AppDelegate.swift in Sources */,
 				1409850E1F7D967400F89FC5 /* LaundryFetcher.swift in Sources */,
+				143F82651F7F6895000EEC46 /* LocationCell.swift in Sources */,
 				140985141F7DEAF900F89FC5 /* Machine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,10 +287,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1409850B1F7D8CF200F89FC5 /* PBXTargetDependency */ = {
+		14218FDA1F7F73580039E097 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftSoup;
-			targetProxy = 1409850A1F7D8CF200F89FC5 /* PBXContainerItemProxy */;
+			targetProxy = 14218FD91F7F73580039E097 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -404,7 +428,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "NU Laundry/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NU Laundry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.NU-Laundry";
@@ -421,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "NU Laundry/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/NU Laundry/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.NU-Laundry";
