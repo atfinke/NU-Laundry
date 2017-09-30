@@ -10,7 +10,7 @@ import UIKit
 
 class MachineCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Interface
 
     @IBOutlet weak private var numberLabel: UILabel! {
         didSet {
@@ -20,6 +20,8 @@ class MachineCell: UITableViewCell {
     }
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var detailLabel: UILabel!
+
+    // MARK: - Properties
 
     var machine: Machine? = nil {
         didSet {
@@ -44,24 +46,6 @@ class MachineCell: UITableViewCell {
                 numberLabel.backgroundColor = UIColor.lightGray
             }
         }
-    }
-
-}
-
-extension UIColor {
-
-    static var postive: UIColor {
-        return UIColor(displayP3Red: 67.0/255.0,
-                       green: 144.0/255.0,
-                       blue: 78.0/255.0,
-                       alpha: 1.0)
-    }
-
-    static var negative: UIColor {
-        return UIColor(displayP3Red: 230.0/255.0,
-                       green: 50.0/255.0,
-                       blue: 35.0/255.0,
-                       alpha: 1.0)
     }
 
 }

@@ -23,10 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = UIColor(red: 73.0/255.0, green: 46.0/255.0, blue: 127.0/255.0, alpha: 1.0)
+
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.white
+        ]
+
         if #available(iOS 11.0, *) {
             
             UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -43,3 +47,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 }
 
+extension UIColor {
+
+    static var postive: UIColor {
+        return UIColor(displayP3Red: 67.0/255.0,
+                       green: 144.0/255.0,
+                       blue: 78.0/255.0,
+                       alpha: 1.0)
+    }
+
+    static var negative: UIColor {
+        return UIColor(displayP3Red: 230.0/255.0,
+                       green: 50.0/255.0,
+                       blue: 35.0/255.0,
+                       alpha: 1.0)
+    }
+
+}

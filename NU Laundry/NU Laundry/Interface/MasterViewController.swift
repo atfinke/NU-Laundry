@@ -12,10 +12,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     // MARK: - Properties
 
-    private let searchController = UISearchController(searchResultsController: nil)
-
     private var locations = [Location]()
     private var filteredLocations = [Location]()
+
+    private let searchController = UISearchController(searchResultsController: nil)
 
     // MARK: - View Life Cycle
 

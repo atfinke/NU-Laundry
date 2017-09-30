@@ -10,7 +10,7 @@ import UIKit
 
 class LocationCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Interface
 
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var washersLabel: UILabel! {
@@ -25,6 +25,8 @@ class LocationCell: UITableViewCell {
             dryersLabel.layer.cornerRadius = 5
         }
     }
+
+    // MARK: - Properties
 
     var location: Location? = nil {
         didSet {
