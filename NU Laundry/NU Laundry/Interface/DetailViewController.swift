@@ -186,6 +186,14 @@ class DetailViewController: UITableViewController {
         return 2
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return washers.count
+        } else {
+            return dryers.count
+        }
+    }
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && !washers.isEmpty {
             return "Washers"
@@ -215,14 +223,6 @@ class DetailViewController: UITableViewController {
 
         //swiftlint:disable:next line_length
         return "Swipe left on an active washing machine to schedule a reminder notification for when its cycle is almost done."
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return washers.count
-        } else {
-            return dryers.count
-        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

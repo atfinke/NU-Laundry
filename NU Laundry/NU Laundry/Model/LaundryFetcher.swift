@@ -72,6 +72,7 @@ struct LaundryFetcher {
                 locationName = locationName.replacingOccurrences(of: "2Nd", with: "2nd")
                 locationName = locationName.replacingOccurrences(of: "3Rd", with: "3rd")
                 locationName = locationName.replacingOccurrences(of: "4Th", with: "4th")
+                locationName = locationName.replacingOccurrences(of: "Parc ", with: "")
 
                 let lastComponentPath = try locationElement.attr("href")
                 guard let url = URL(string: "http://classic.laundryview.com/" + lastComponentPath) else {
