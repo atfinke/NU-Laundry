@@ -51,28 +51,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return true
     }
 
+    // MARK: - Background Fetch
+
+    func application(_ application: UIApplication,
+                     performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name("UIBackgroundFetch"), object: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            completionHandler(.newData)
+        }
+    }
+
+    // MARK: - UISplitViewControllerDelegate
+
     func splitViewController(_ splitViewController: UISplitViewController,
                              collapseSecondary secondaryViewController: UIViewController,
                              onto primaryViewController: UIViewController) -> Bool {
         return true
-    }
-
-}
-
-extension UIColor {
-
-    static var postive: UIColor {
-        return UIColor(displayP3Red: 67.0/255.0,
-                       green: 144.0/255.0,
-                       blue: 78.0/255.0,
-                       alpha: 1.0)
-    }
-
-    static var negative: UIColor {
-        return UIColor(displayP3Red: 230.0/255.0,
-                       green: 50.0/255.0,
-                       blue: 35.0/255.0,
-                       alpha: 1.0)
     }
 
 }

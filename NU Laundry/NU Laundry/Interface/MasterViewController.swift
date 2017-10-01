@@ -13,6 +13,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     // MARK: - Properties
 
+    private var reloadTimer: Timer?
     private var locations = [Location]()
     private var filteredLocations = [Location]()
 
@@ -37,11 +38,32 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             navigationItem.largeTitleDisplayMode = .always
             navigationController?.navigationBar.prefersLargeTitles = true
         }
+
+        //swiftlint:disable discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.startReloadingLocations()
+        }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("UIBackgroundFetch"),
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            // Don't start timer
+            self?.reloadLocations()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+
+        startReloadingLocations()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        reloadTimer?.invalidate()
     }
 
     // MARK: - UISearchResultsUpdating
@@ -61,7 +83,14 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         tableView.reloadData()
     }
 
-    // MARK: - Rooms
+    // MARK: - Locations
+
+    private func startReloadingLocations() {
+        reloadTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
+            self?.startReloadingLocations()
+        }
+        reloadLocations()
+    }
 
     @objc private func reloadLocations() {
         DispatchQueue.main.async {
@@ -70,11 +99,11 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
         LaundryFetcher.fetchLocations { (locations, _) in
             DispatchQueue.main.async {
+                var shouldReloadAll = true
                 if let locations = locations, !locations.isEmpty {
+                    shouldReloadAll = self.locations.count != locations.count
                     self.locations = locations
-                    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
-                        self?.reloadLocations()
-                    }
+
                     Answers.logCustomEvent(withName: "Updated Locations", customAttributes: nil)
                 } else {
                     self.locations = []
@@ -88,9 +117,20 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
                     }))
                     self.present(alertController, animated: true, completion: nil)
 
+                    self.reloadTimer?.invalidate()
                     Answers.logCustomEvent(withName: "Locations Error", customAttributes: nil)
                 }
-                self.tableView.reloadData()
+
+                if shouldReloadAll {
+                    self.tableView.reloadData()
+                } else {
+                    let selectedRow = self.tableView.indexPathForSelectedRow
+                    self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows ?? [], with: .none)
+
+                    self.tableView.selectRow(at: selectedRow,
+                                             animated: false,
+                                             scrollPosition: UITableViewScrollPosition.none)
+                }
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
