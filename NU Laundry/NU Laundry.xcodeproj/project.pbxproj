@@ -19,6 +19,7 @@
 		140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140985151F7E034F00F89FC5 /* MachineCell.swift */; };
 		14218FD71F7F73580039E097 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; };
 		14218FD81F7F73580039E097 /* SwiftSoup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 143F826F1F7F6D60000EEC46 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1421B8191F814AF1004CDE1A /* UIColor+Laundry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B8181F814AF1004CDE1A /* UIColor+Laundry.swift */; };
 		143F82651F7F6895000EEC46 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143F82641F7F6895000EEC46 /* LocationCell.swift */; };
 		145C63631F8051CE00B8D502 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 145C63611F80519A00B8D502 /* Settings.bundle */; };
 		145C636A1F8053DC00B8D502 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145C63681F8053A600B8D502 /* Fabric.framework */; };
@@ -76,6 +77,7 @@
 		140985111F7DEAF300F89FC5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		140985131F7DEAF900F89FC5 /* Machine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Machine.swift; sourceTree = "<group>"; };
 		140985151F7E034F00F89FC5 /* MachineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineCell.swift; sourceTree = "<group>"; };
+		1421B8181F814AF1004CDE1A /* UIColor+Laundry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Laundry.swift"; sourceTree = "<group>"; };
 		143F82641F7F6895000EEC46 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		143F82691F7F6D5F000EEC46 /* SwiftSoup.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftSoup.xcodeproj; path = ../../../SwiftSoup/SwiftSoup.xcodeproj; sourceTree = "<group>"; };
 		143F82741F7F72A3000EEC46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		143F82671F7F6D41000EEC46 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				1421B8181F814AF1004CDE1A /* UIColor+Laundry.swift */,
 				143F82641F7F6895000EEC46 /* LocationCell.swift */,
 				140985151F7E034F00F89FC5 /* MachineCell.swift */,
 				140984ED1F7D8B8B00F89FC5 /* MasterViewController.swift */,
@@ -212,6 +215,11 @@
 					140984E71F7D8B8B00F89FC5 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -322,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140984F01F7D8B8B00F89FC5 /* DetailViewController.swift in Sources */,
+				1421B8191F814AF1004CDE1A /* UIColor+Laundry.swift in Sources */,
 				140985161F7E034F00F89FC5 /* MachineCell.swift in Sources */,
 				140984EE1F7D8B8B00F89FC5 /* MasterViewController.swift in Sources */,
 				140985121F7DEAF300F89FC5 /* Location.swift in Sources */,

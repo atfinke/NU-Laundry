@@ -15,6 +15,7 @@ class DetailViewController: UITableViewController {
 
     // MARK: - Properties
 
+    private var reloadTimer: Timer?
     private var dryers = [Machine]()
     private var washers = [Machine]()
 
@@ -23,6 +24,36 @@ class DetailViewController: UITableViewController {
             reloadMachines()
             title = detailItem?.name
         }
+    }
+
+    // MARK: - View Life Cycle
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startReloadingMachines()
+
+        //swiftlint:disable discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            self?.startReloadingMachines()
+        }
+
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("UIBackgroundFetch"),
+                                               object: nil,
+                                               queue: nil) { [weak self] _ in
+            // Don't start timer
+            self?.reloadMachines()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        reloadTimer?.invalidate()
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Machines
@@ -35,6 +66,13 @@ class DetailViewController: UITableViewController {
         }
     }
 
+    private func startReloadingMachines() {
+        reloadTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
+            self?.reloadMachines()
+        }
+        reloadMachines()
+    }
+
     @objc private func reloadMachines() {
         guard let location = detailItem, !isEditing else { return }
 
@@ -44,13 +82,12 @@ class DetailViewController: UITableViewController {
 
         LaundryFetcher.fetchMachines(for: location) { (washers, dryers, _) in
             DispatchQueue.main.async {
+                var shouldReloadAll = true
                 if let washers = washers, let dryers = dryers, !washers.isEmpty, !dryers.isEmpty {
+                    shouldReloadAll = self.washers.count != washers.count || self.dryers.count != dryers.count
                     self.washers = washers
                     self.dryers = dryers
 
-                    Timer.scheduledTimer(withTimeInterval: 30.0, repeats: false) { [weak self] _ in
-                        self?.reloadMachines()
-                    }
                     Answers.logCustomEvent(withName: "Updated Machines", customAttributes: nil)
                 } else {
                     self.washers = []
@@ -61,13 +98,19 @@ class DetailViewController: UITableViewController {
                                                             message: message,
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
-                        self.reloadMachines()
+                        self.startReloadingMachines()
                     }))
                     self.present(alertController, animated: true, completion: nil)
 
+                    self.reloadTimer?.invalidate()
                     Answers.logCustomEvent(withName: "Machines Error", customAttributes: nil)
                 }
-                self.tableView.reloadData()
+
+                if shouldReloadAll {
+                    self.tableView.reloadData()
+                } else {
+                    self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows ?? [], with: .none)
+                }
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -143,6 +186,14 @@ class DetailViewController: UITableViewController {
         return 2
     }
 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return washers.count
+        } else {
+            return dryers.count
+        }
+    }
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 && !washers.isEmpty {
             return "Washers"
@@ -172,14 +223,6 @@ class DetailViewController: UITableViewController {
 
         //swiftlint:disable:next line_length
         return "Swipe left on an active washing machine to schedule a reminder notification for when its cycle is almost done."
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return washers.count
-        } else {
-            return dryers.count
-        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
