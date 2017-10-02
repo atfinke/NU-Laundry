@@ -30,7 +30,9 @@ struct LaundryFetcher {
 
     static func fetchLocations(completion: @escaping ((_ locations: [Location]?, _ error: ParsingError?) -> Void)) {
         let url = URL(string: "http://classic.laundryview.com/lvs.php?s=328")!
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
+        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38", forHTTPHeaderField: "User-Agent")
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, .connectionError)
                 return
@@ -67,12 +69,12 @@ struct LaundryFetcher {
         var locations = [Location]()
         for (index, locationElement) in locationElements.enumerated() {
             do {
-                var locationName = try locationElement.text().capitalized
-                locationName = locationName.replacingOccurrences(of: "1St", with: "1st")
-                locationName = locationName.replacingOccurrences(of: "2Nd", with: "2nd")
-                locationName = locationName.replacingOccurrences(of: "3Rd", with: "3rd")
-                locationName = locationName.replacingOccurrences(of: "4Th", with: "4th")
-                locationName = locationName.replacingOccurrences(of: "Parc ", with: "")
+                let locationName = try locationElement.text().capitalized
+                    .replacingOccurrences(of: "1St", with: "1st")
+                    .replacingOccurrences(of: "2Nd", with: "2nd")
+                    .replacingOccurrences(of: "3Rd", with: "3rd")
+                    .replacingOccurrences(of: "4Th", with: "4th")
+                    .replacingOccurrences(of: "Parc ", with: "")
 
                 let lastComponentPath = try locationElement.attr("href")
                 guard let url = URL(string: "http://classic.laundryview.com/" + lastComponentPath) else {
@@ -119,7 +121,9 @@ struct LaundryFetcher {
     static func fetchMachines(for location: Location,
                               completion: @escaping (([Machine]?, [Machine]?, ParsingError?) -> Void)) {
 
-        let dataTask = URLSession.shared.dataTask(with: location.url) { (data, _, error) in
+        var urlRequest = URLRequest(url: location.url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38", forHTTPHeaderField: "User-Agent")
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, nil, .connectionError)
                 return
