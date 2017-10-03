@@ -118,7 +118,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
 
-        LaundryFetcher.fetchLocations { (locations, _) in
+        LaundryFetcher.fetchLocations { (locations, error) in
             DispatchQueue.main.async {
                 var shouldReloadAll = true
                 if let locations = locations, !locations.isEmpty {
@@ -129,7 +129,11 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
                 } else {
                     self.locations = []
 
-                    let message = "An issue occured when trying to update the laundry infomation."
+                    var message = "An issue occured when trying to update the laundry infomation."
+                    if error == .serverSideError {
+                        message = "Laundry service information is currently unavailable. Check back later."
+                    }
+
                     let alertController = UIAlertController(title: "Connection Issue",
                                                             message: message,
                                                             preferredStyle: .alert)
@@ -180,7 +184,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView,
                             editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 
-        guard !isFiltering() else { return nil }
+        guard !isFiltering() else { return [] }
 
         let location = self.location(for: indexPath)
         let isFavorite = isLocationFavorite(location)
@@ -192,7 +196,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
             self.toggleLocationFavoriteStatus(location)
             self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
-            self.tableView.reloadRows(at: self.tableView.indexPathsForVisibleRows ?? [], with: .none)
         }
         favoriteAction.backgroundColor = isFavorite ? UIColor.red : view.tintColor
 

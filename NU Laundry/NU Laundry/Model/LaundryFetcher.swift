@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftSoup
+import Crashlytics
 
 struct LaundryFetcher {
 
@@ -24,14 +25,22 @@ struct LaundryFetcher {
 
         case machineDetailError
         case machineListError
+
+        case serverSideError
     }
 
     // MARK: - Locations
 
     static func fetchLocations(completion: @escaping ((_ locations: [Location]?, _ error: ParsingError?) -> Void)) {
         let url = URL(string: "http://classic.laundryview.com/lvs.php?s=328")!
-        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
-        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38", forHTTPHeaderField: "User-Agent")
+
+        var urlRequest = URLRequest(url: url,
+                                    cachePolicy: .reloadIgnoringLocalCacheData,
+                                    timeoutInterval: 10.0)
+
+        //swiftlint:disable:next line_length
+        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38 \(Double(arc4random()).truncatingRemainder(dividingBy: pow(10, 3)))", forHTTPHeaderField: "User-Agent")
+
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, .connectionError)
@@ -91,6 +100,12 @@ struct LaundryFetcher {
                 throw ParsingError.locationDetailError
             }
         }
+
+        guard locations.count > 10 else {
+            Answers.logCustomEvent(withName: "Server Side Error", customAttributes: ["HTML": locationsHTML])
+            throw ParsingError.serverSideError
+        }
+
         return locations.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.name < rhs.name
         })
@@ -121,8 +136,13 @@ struct LaundryFetcher {
     static func fetchMachines(for location: Location,
                               completion: @escaping (([Machine]?, [Machine]?, ParsingError?) -> Void)) {
 
-        var urlRequest = URLRequest(url: location.url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
-        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38", forHTTPHeaderField: "User-Agent")
+        var urlRequest = URLRequest(url: location.url,
+                                    cachePolicy: .reloadIgnoringLocalCacheData,
+                                    timeoutInterval: 10.0)
+
+        //swiftlint:disable:next line_length
+        urlRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38 \(Double(arc4random()).truncatingRemainder(dividingBy: pow(10, 3)))", forHTTPHeaderField: "User-Agent")
+
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, _, error) in
             guard let data = data, let html = String(data: data, encoding: .utf8) else {
                 completion(nil, nil, .connectionError)
