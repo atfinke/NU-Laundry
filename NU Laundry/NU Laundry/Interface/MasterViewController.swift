@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 import Crashlytics
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
@@ -66,6 +67,9 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         super.viewWillAppear(animated)
 
         startReloadingLocations()
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
