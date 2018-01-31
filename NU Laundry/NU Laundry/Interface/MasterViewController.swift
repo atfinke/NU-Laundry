@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import StoreKit
 import Crashlytics
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
@@ -67,9 +66,6 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         super.viewWillAppear(animated)
 
         startReloadingLocations()
-        if #available(iOS 10.3, *) {
-            SKStoreReviewController.requestReview()
-        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -133,8 +129,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
                 } else {
                     self.locations = []
 
-                    var message = "An issue occured when trying to update the laundry infomation."
-                    if error == .serverSideError {
+                    let message: String
+                    if error == .externalNetworkError {
+                        message = "You must be on the Northwestern network to view laundry service information."
+                    } else {
                         message = "Laundry service information is currently unavailable. Check back later."
                     }
 
@@ -235,8 +233,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             } else {
                 return "Favorites"
             }
-        } else {
+        } else if !locations.isEmpty {
             return "All Locations"
+        } else {
+            return nil
         }
     }
 
