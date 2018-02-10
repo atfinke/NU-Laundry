@@ -26,7 +26,7 @@ struct LaundryFetcher {
         case machineDetailError
         case machineListError
 
-        case serverSideError
+        case externalNetworkError
     }
 
     // MARK: - Locations
@@ -101,9 +101,9 @@ struct LaundryFetcher {
             }
         }
 
-        guard locations.count > 10 else {
-            Answers.logCustomEvent(withName: "Server Side Error", customAttributes: ["HTML": locationsHTML])
-            throw ParsingError.serverSideError
+        // Returns "Building #1, Building #2, etc when outside NU
+        if locations.filter({ $0.name.contains("Building") }).count == locations.count {
+            throw ParsingError.externalNetworkError
         }
 
         return locations.sorted(by: { (lhs, rhs) -> Bool in
@@ -123,7 +123,7 @@ struct LaundryFetcher {
         guard let washingIndex = adjustedString.range(of: " W")?.lowerBound,
             let splitIndex = adjustedString.range(of: "/ ")?.upperBound,
             let dryerIndex = adjustedString.range(of: " D")?.lowerBound,
-            let washers = Int(adjustedString[adjustedString.startIndex...washingIndex]),
+            let washers = Int(adjustedString[adjustedString.startIndex...washingIndex].replacingOccurrences(of: " ", with: "")),
             let dryers = Int(adjustedString[splitIndex...dryerIndex].replacingOccurrences(of: " ", with: "")) else {
                 throw ParsingError.availabilityIndexError
         }

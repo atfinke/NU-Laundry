@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 import UserNotifications
 
 import Crashlytics
@@ -44,6 +45,10 @@ class DetailViewController: UITableViewController {
                                                queue: nil) { [weak self] _ in
             // Don't start timer
             self?.reloadMachines()
+        }
+
+        if #available(iOS 10.3, *) {
+            SKStoreReviewController.requestReview()
         }
     }
 
@@ -93,7 +98,7 @@ class DetailViewController: UITableViewController {
                     self.washers = []
                     self.dryers = []
 
-                    let message = "An issue occured when trying to update the laundry infomation."
+                    let message = "Laundry service information is currently unavailable. Check back later."
                     let alertController = UIAlertController(title: "Connection Issue",
                                                             message: message,
                                                             preferredStyle: .alert)
