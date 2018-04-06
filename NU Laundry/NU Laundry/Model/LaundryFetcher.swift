@@ -123,8 +123,10 @@ struct LaundryFetcher {
         guard let washingIndex = adjustedString.range(of: " W")?.lowerBound,
             let splitIndex = adjustedString.range(of: "/ ")?.upperBound,
             let dryerIndex = adjustedString.range(of: " D")?.lowerBound,
-            let washers = Int(adjustedString[adjustedString.startIndex...washingIndex].replacingOccurrences(of: " ", with: "")),
-            let dryers = Int(adjustedString[splitIndex...dryerIndex].replacingOccurrences(of: " ", with: "")) else {
+            let washers = Int(adjustedString[adjustedString.startIndex...washingIndex]
+                .replacingOccurrences(of: " ", with: "")),
+            let dryers = Int(adjustedString[splitIndex...dryerIndex]
+                .replacingOccurrences(of: " ", with: "")) else {
                 throw ParsingError.availabilityIndexError
         }
 
