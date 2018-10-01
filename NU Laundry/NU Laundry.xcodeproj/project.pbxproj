@@ -24,7 +24,7 @@
 		145C63631F8051CE00B8D502 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 145C63611F80519A00B8D502 /* Settings.bundle */; };
 		145C636A1F8053DC00B8D502 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145C63681F8053A600B8D502 /* Fabric.framework */; };
 		145C636C1F8053DF00B8D502 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145C63691F8053A600B8D502 /* Crashlytics.framework */; };
-		147E87F71F804882001391B1 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 147E87F51F804876001391B1 /* fabric.apikey */; };
+		14AF2CF92074F65D004394B5 /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 14AF2CF72074F65D004394B5 /* fabric.apikey */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +84,8 @@
 		145C63611F80519A00B8D502 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		145C63681F8053A600B8D502 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		145C63691F8053A600B8D502 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
-		147E87F51F804876001391B1 /* fabric.apikey */ = {isa = PBXFileReference; lastKnownFileType = text; path = fabric.apikey; sourceTree = SOURCE_ROOT; };
-		147E87F61F804876001391B1 /* fabric.buildsecret */ = {isa = PBXFileReference; lastKnownFileType = text; path = fabric.buildsecret; sourceTree = SOURCE_ROOT; };
+		14AF2CF62074F65D004394B5 /* fabric.buildsecret */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.buildsecret; sourceTree = SOURCE_ROOT; };
+		14AF2CF72074F65D004394B5 /* fabric.apikey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fabric.apikey; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,8 +154,8 @@
 		143F82681F7F6D4E000EEC46 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				147E87F51F804876001391B1 /* fabric.apikey */,
-				147E87F61F804876001391B1 /* fabric.buildsecret */,
+				14AF2CF72074F65D004394B5 /* fabric.apikey */,
+				14AF2CF62074F65D004394B5 /* fabric.buildsecret */,
 				140984F41F7D8B8B00F89FC5 /* Assets.xcassets */,
 				143F82741F7F72A3000EEC46 /* Info.plist */,
 				140984F61F7D8B8B00F89FC5 /* LaunchScreen.storyboard */,
@@ -270,8 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				140984F81F7D8B8B00F89FC5 /* LaunchScreen.storyboard in Resources */,
-				147E87F71F804882001391B1 /* fabric.apikey in Resources */,
 				145C63631F8051CE00B8D502 /* Settings.bundle in Resources */,
+				14AF2CF92074F65D004394B5 /* fabric.apikey in Resources */,
 				140984F51F7D8B8B00F89FC5 /* Assets.xcassets in Resources */,
 				140984F31F7D8B8B00F89FC5 /* Main.storyboard in Resources */,
 			);
